@@ -8,7 +8,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        return "Bu userlarni royxati";
+//        return response("Bu userlarni royxati", 201, ['X-Header-One' => 'Header Value Testing']);
+
+        return response("Bu userlarni royxati", 201)
+            ->header('X-Header-One', 'Header Value Testing');
     }
 
     public function show($user)
@@ -34,9 +37,9 @@ class UserController extends Controller
 //        dd($request->input('email'));
 //        dd($request->all());
 
-       /* if ($request->has('name')) {
-            echo 'yes';
-        }*/
+        /* if ($request->has('name')) {
+             echo 'yes';
+         }*/
 
         dd($request->name);
     }
