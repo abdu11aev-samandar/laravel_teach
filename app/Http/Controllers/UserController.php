@@ -11,7 +11,14 @@ class UserController extends Controller
 
     public function show($user)
     {
-        return "tanlangan user: " . $user;
+//        return "tanlangan user: " . $user;
+
+        /*return view('users.show', [
+            'name' => 'Samandar',
+            'id' => $user
+        ]);*/
+
+        return view('users.show')->with(['name' => 'Samandar', 'id' => $user]);
     }
 
     public function create()
@@ -21,6 +28,6 @@ class UserController extends Controller
 
     public function edit($user_id)
     {
-        return $user_id.' ni o\'uzgartirish';
+        return $user_id . ' ni o\'uzgartirish';
     }
 }
