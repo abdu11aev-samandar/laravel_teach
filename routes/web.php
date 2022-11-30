@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,59 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+//Route::get('/test-route', [Controller::class, 'action']);
+
+/*Route::get('/test-route', function () {
+    return ['success' => 'Muvaffaqqiyatli'];
+});*/
+
+/*Route::get('/test-route', function () {
+    return 'Muvaffaqqiyatli';
+});*/
+
+///////////////////////////////////////////////////////////
+
+/*Route::get('/test-route', function () {
+    return view('test');
+});*/
+
+Route::view('/test-route', 'test');
+
+///////////////////////////////////////////////////////////
+
+Route::get('users', function () {
+    return 'Users';
+});
+
+Route::get('/users/{id}', function ($id) {
+    return 'Users';
+});
+
+Route::get('/users/{id?}', function ($id = null) {
+    return 'Users';
+});
+
+Route::get('/users/{id?}', function ($id = null) {
+    return 'Users';
+})->name('userlar');
+
+/////////////////////////////////////////////////////////////
+
+Route::post('contact', function () {
+    return 'post route';
+});
+
+Route::redirect('/first', 'second');
+
+Route::get('second', function () {
+    return 'second route';
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get('/users', function () {
+        // Matches The "/admin/usres" URL
+        return 'admin users';
+    });
 });
