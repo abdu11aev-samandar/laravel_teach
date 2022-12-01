@@ -1,0 +1,4 @@
+<div>
+    Alert
+    {{ $type }}
+</div>
