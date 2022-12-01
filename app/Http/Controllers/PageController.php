@@ -11,12 +11,14 @@ class PageController extends Controller
         return view('main');
     }
 
-    public function welcome()
+    public function about()
     {
-        return view('welcome', [
-            'name' => 'John',
-            'records' => [1, 2, 3, 4, 5]
-        ]);
+        return view('about');
+    }
+
+    public function services()
+    {
+        return view('services');
     }
 
 
