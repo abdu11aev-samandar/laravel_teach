@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use DB;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,41 +15,27 @@ class PostController extends Controller
      */
     public function index()
     {
+//        $posts = DB::table('posts')->where('title','assds')->get();
+//        $posts = DB::table('posts')->find(5);
+//        $posts = DB::table('posts')->get()->pluck('title');
+//        $posts = DB::table('posts')->get()->chunk(2);
+//        $posts = DB::table('posts')->count();
+//        $posts = DB::table('posts')->whereIn('id', [2, 1]);
+//        $posts = DB::table('posts')->latest()->get();
 
-        /*$newPost = new Post;
-        $newPost->title = 'new posts';
-        $newPost->short_content = 'new post short content';
-        $newPost->content = 'new post content';
-        $newPost->photo = '/storage/new_post.png';
-
-        $newPost->save();*/
-
-        /*$newPost = Post::create([
-            'title' => '5',
-            'short_content' => 'short',
-            'content' => 'content 123',
-            'photo' => 'photo.jpg'
+        /*$posts = DB::table('posts')->insert([
+            'title' => '123',
+            'short_content' => '123',
+            'content' => '123',
+            'photo' => '123',
         ]);*/
 
-        /*$post = Post::find(4);
-        $post->title = "O'zgartirilgan sarlavha";
-        $post->save();*/
+        DB::table('posts')->where('id', 1)->delete();
 
-//        $post = Post::find(4)->update(['title' => "2 O'zgartirilgan sarlavha"]);
+//        dd($posts);
 
-//        $post = Post::find(5);
-//        $post->delete();
-
-//        Post::destroy(1);
-
-        Post::withTrashed()->find(1)->restore();
-
-//        Post::destroy(1);
-        $posts = Post::all();
-        dd($posts);
-
+        return 'success';
 //        return view('posts.index');
-        return 'success deleted';
     }
 
     /**
