@@ -11,31 +11,13 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-//        $posts = DB::table('posts')->where('title','assds')->get();
-//        $posts = DB::table('posts')->find(5);
-//        $posts = DB::table('posts')->get()->pluck('title');
-//        $posts = DB::table('posts')->get()->chunk(2);
-//        $posts = DB::table('posts')->count();
-//        $posts = DB::table('posts')->whereIn('id', [2, 1]);
-//        $posts = DB::table('posts')->latest()->get();
+        $posts = Post::all();
 
-        /*$posts = DB::table('posts')->insert([
-            'title' => '123',
-            'short_content' => '123',
-            'content' => '123',
-            'photo' => '123',
-        ]);*/
-
-        DB::table('posts')->where('id', 1)->delete();
-
-//        dd($posts);
-
-        return 'success';
-//        return view('posts.index');
+        return view('posts.index')->with('posts', $posts);
     }
 
     /**
@@ -63,11 +45,14 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return view('posts.show')->with([
+            'post' => $post,
+            'recent_posts' => Post::latest()->get()->except($post->id)->take(5)
+        ]);
     }
 
     /**
