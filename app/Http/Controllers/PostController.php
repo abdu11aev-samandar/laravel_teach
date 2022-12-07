@@ -6,6 +6,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use DB;
 use Illuminate\Http\Request;
+use Storage;
 
 class PostController extends Controller
 {
@@ -23,12 +24,11 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-//        $path = $request->file('photo')->store('post-photos');
-
         if ($request->hasFile('photo')) {
             $name = $request->file('photo')->getClientOriginalName();
             $path = $request->file('photo')->storeAs('post-photo', $name);
         }
+
         $post = Post::create([
             'title' => $request->title,
             'short_content' => $request->short_content,
@@ -47,14 +47,31 @@ class PostController extends Controller
         ]);
     }
 
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('posts.edit')->with(['post' => $post]);
     }
 
-    public function update(Request $request, $id)
+    public function update(StorePostRequest $request, Post $post)
     {
-        //
+        if ($request->hasFile('photo')) {
+
+            if (isset($post->photo)) {
+                Storage::delete($post->photo);
+            }
+
+            $name = $request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->storeAs('post-photo', $name);
+        }
+
+        $post->update([
+            'title' => $request->title,
+            'short_content' => $request->short_content,
+            'content' => $request->content,
+            'photo' => $path ?? $post->photo
+        ]);
+
+        return redirect()->route('posts.show', ['post' => $post->id]);
     }
 
     public function destroy($id)

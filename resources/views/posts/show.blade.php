@@ -13,6 +13,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
+                    <div class="text-right">
+                        <a class="btn btn-sm btn-outline-dark" href="{{ route('posts.edit',['post'=>$post->id]) }}">
+                            O'zgartirish
+                        </a>
+                        <a class="btn btn-sm btn-outline-danger" href="">
+                            O'chirish
+                        </a>
+                    </div>
                     <div class="mb-5">
                         <div class="d-flex mb-2">
                             <a class="text-secondary text-uppercase font-weight-medium" href="">Admin</a>
@@ -26,7 +34,8 @@
                     </div>
 
                     <div class="mb-5">
-                        <img class="img-fluid rounded w-100 mb-4" src="{{ asset('storage/' . $post->photo) }}" alt="Image">
+                        <img class="img-fluid rounded w-100 mb-4" src="{{ asset('storage/' . $post->photo) }}"
+                             alt="Image">
                         <p>{{ $post->content }}</p>
                     </div>
 
