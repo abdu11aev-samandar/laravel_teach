@@ -23,7 +23,7 @@
                     </div>
                 @endif--}}
 
-                <form action="{{ route('posts.store') }}" method="post">
+                <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="control-group mb-4">
                         <input type="text" class="form-control p-4" name="title" value="{{ old('title') }}"
@@ -32,10 +32,12 @@
                         <p class="help-block text-danger ml-4">{{ $message }}</p>
                         @enderror
                     </div>
-                    {{--<div class="control-group">
-                        <input type="file" class="form-control p-4" id="subject" placeholder="Rasm"/>
-                        <p class="help-block text-danger"></p>
-                    </div>--}}
+                    <div class="control-group mb-4">
+                        <input name="photo" type="file" class="form-control p-4" id="subject" placeholder="Rasm"/>
+                        @error('photo')
+                        <p class="help-block text-danger ml-4">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="control-group mb-4">
                                 <textarea class="form-control p-4" rows="3" name="short_content"
                                           placeholder="Qisqacha Ma'lumot">{{ old('short_content') }}</textarea>

@@ -10,8 +10,9 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title.required' => 'Sarlavha kiritish majburish',
+            'photo.image' => 'File turi rasm bo\'lishi kerak',
             'short_content.required' => 'Qisqacha ma\'lumot kiritish majburiy',
-            'content.required' => 'Maqola kiritish majburiy'
+            'content.required' => 'Maqola kiritish majburiy',
         ];
     }
 
@@ -36,6 +37,7 @@ class StorePostRequest extends FormRequest
             'title' => 'required|max:255',
             'short_content' => 'required',
             'content' => 'required',
+            'photo' => 'nullable|image|max:2*1024',
         ];
     }
 }
