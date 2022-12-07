@@ -13,13 +13,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="text-right">
-                        <a class="btn btn-sm btn-outline-dark" href="{{ route('posts.edit',['post'=>$post->id]) }}">
+                    <div class="row mb-4">
+                        <a class="btn btn-sm btn-outline-dark mr-2"
+                           href="{{ route('posts.edit',['post'=>$post->id]) }}">
                             O'zgartirish
                         </a>
-                        <a class="btn btn-sm btn-outline-danger" href="">
-                            O'chirish
-                        </a>
+                        <form action="{{ route('posts.destroy',['post'=>$post->id]) }}"
+                              method="post"
+                              onsubmit="return confirm('Rostan ham o\'chirishni hohlaysizmi?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                O'chirish
+                            </button>
+                        </form>
                     </div>
                     <div class="mb-5">
                         <div class="d-flex mb-2">

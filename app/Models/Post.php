@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'title',
@@ -16,7 +16,4 @@ class Post extends Model
         'content',
         'photo'
     ];
-
-//    protected $guarded = [];
-//    protected $guarded = ['id'];
 }
