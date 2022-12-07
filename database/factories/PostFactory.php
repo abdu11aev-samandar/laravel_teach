@@ -19,8 +19,6 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-//            'user_id' => User::factory(),
-//            'user_id' => User::factory()->has(Post::factory()->count(3)),
             'user_id' => User::factory()->hasPosts(3),
             'title' => fake()->sentence(3),
             'short_content' => fake()->sentence(15),

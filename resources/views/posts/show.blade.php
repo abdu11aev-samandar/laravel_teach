@@ -47,44 +47,49 @@
                     </div>
 
                     <div class="mb-5">
-                        <h3 class="mb-4 section-title">3 Comments</h3>
-                        <div class="media mb-4">
-                            <img src="/img/user.jpg" alt="Image" class="img-fluid rounded-circle mr-3 mt-1"
-                                 style="width: 45px;">
-                            <div class="media-body">
-                                <h6>John Doe <small><i>01 Jan 2045 at 12:00pm</i></small></h6>
-                                <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at.
-                                    Kasd diam tempor rebum magna dolores sed sed eirmod ipsum clita, at tempor amet
-                                    ipsum diam tempor sit.</p>
-                                <button class="btn btn-sm btn-light">Reply</button>
+                        <h3 class="mb-4 section-title">{{ $post->comments()->count() }} Izohlar</h3>
+
+                        @foreach($post->comments as $comment)
+                            <div class="media mb-4">
+                                <img src="{{ $comment->user->photo }}" alt="Image" class="img-fluid rounded-circle mr-3 mt-1"
+                                     style="width: 45px;">
+                                <div class="media-body">
+                                    <h6>{{ $comment->user->name }} <small><i>{{ $comment->created_at }}</i></small></h6>
+                                    <p>{{ $comment->body }}</p>
+                                    {{--<button class="btn btn-sm btn-light">Reply</button>--}}
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
+
                     </div>
 
                     <div class="bg-light rounded p-5">
-                        <h3 class="mb-4 section-title">Leave a comment</h3>
-                        <form>
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <label for="name">Name *</label>
-                                    <input type="text" class="form-control" id="name">
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <label for="email">Email *</label>
-                                    <input type="email" class="form-control" id="email">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="website">Website</label>
-                                <input type="url" class="form-control" id="website">
-                            </div>
+                        <h3 class="mb-4 section-title">Izoh qoldirish</h3>
 
-                            <div class="form-group">
-                                <label for="message">Message *</label>
-                                <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                        {{--<div class="form-row">
+                            <div class="form-group col-sm-6">
+                                <label for="name">Name *</label>
+                                <input type="text" class="form-control" id="name">
                             </div>
+                            <div class="form-group col-sm-6">
+                                <label for="email">Email *</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="website">Website</label>
+                            <input type="url" class="form-control" id="website">
+                        </div>--}}
+
+                        <form action="{{ route('comments.store') }}" method="post">
+                            @csrf
+                            <div class="form-group">
+                                <label for="message">Xabar</label>
+                                <textarea name="body" cols="30" rows="5" class="form-control"></textarea>
+                            </div>
+                            <input type="hidden" name="post_id" value="{{ $post->id }}">
                             <div class="form-group mb-0">
-                                <input type="submit" value="Leave Comment" class="btn btn-primary">
+                                <input type="submit" value="Yuborish" class="btn btn-primary">
                             </div>
                         </form>
                     </div>
