@@ -22,6 +22,19 @@
                         <p class="help-block text-danger ml-4">{{ $message }}</p>
                         @enderror
                     </div>
+
+                    <div class="control-group mb-4">
+                        <select name="category_id" class="form-select form-control form-control-lg">
+{{--                            <option selected>Kategoriya tanlang</option>--}}
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                       {{-- @error('title')
+                        <p class="help-block text-danger ml-4">{{ $message }}</p>
+                        @enderror--}}
+                    </div>
+
                     <div class="control-group mb-4">
                         <input name="photo" type="file" class="form-control p-4" id="subject" placeholder="Rasm"/>
                         @error('photo')

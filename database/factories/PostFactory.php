@@ -20,6 +20,7 @@ class PostFactory extends Factory
     {
         return [
             'user_id' => User::factory()->hasPosts(3),
+            'category_id' => rand(1, 5),
             'title' => fake()->sentence(3),
             'short_content' => fake()->sentence(15),
             'content' => fake()->paragraph(15),
