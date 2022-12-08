@@ -12,6 +12,11 @@ use Storage;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index()
     {
         $posts = Post::latest()->paginate(9);
@@ -35,7 +40,7 @@ class PostController extends Controller
         }
 
         $post = Post::create([
-            'user_id' => rand(1, 10),
+            'user_id' => auth()->user()->id,
             'category_id' => $request->category_id,
             'title' => $request->title,
             'short_content' => $request->short_content,

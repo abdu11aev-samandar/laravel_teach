@@ -13,7 +13,7 @@ class CommentController extends Controller
         $comment = Comment::create([
             'body' => $request->body,
             'post_id' => $request->post_id,
-            'user_id' => rand(1, 10),
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->back();
