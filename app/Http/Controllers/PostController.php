@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostCreated;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 use App\Models\Post;
@@ -56,6 +57,8 @@ class PostController extends Controller
             }
         }
 
+        PostCreated::dispatch($post);
+
         return redirect()->route('posts.index');
     }
 
@@ -71,26 +74,12 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        /*if (!Gate::allows('update-post', $post)) {
-            abort(403);
-        }*/
-
-//        Gate::authorize('update-post', $post);
-
-//        Gate::authorize('update', $post);
-
-//        $this->authorize('update', $post);
 
         return view('posts.edit')->with(['post' => $post]);
     }
 
     public function update(StorePostRequest $request, Post $post)
     {
-//        Gate::authorize('update-post', $post);
-
-//        Gate::authorize('update', $post);
-
-//        $this->authorize('update', $post);
 
         if ($request->hasFile('photo')) {
 
