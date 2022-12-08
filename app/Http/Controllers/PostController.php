@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use DB;
 use Illuminate\Http\Request;
 use Storage;
@@ -21,7 +22,8 @@ class PostController extends Controller
     public function create()
     {
         return view('posts.create')->with([
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'tags' => Tag::all()
         ]);
     }
 
@@ -41,6 +43,12 @@ class PostController extends Controller
             'photo' => $path ?? null
         ]);
 
+        if (isset($request->tags)) {
+            foreach ($request->tags as $tag) {
+                $post->tags()->attach($tag);
+            }
+        }
+
         return redirect()->route('posts.index');
     }
 
@@ -48,7 +56,9 @@ class PostController extends Controller
     {
         return view('posts.show')->with([
             'post' => $post,
-            'recent_posts' => Post::latest()->get()->except($post->id)->take(5)
+            'recent_posts' => Post::latest()->get()->except($post->id)->take(5),
+            'categories' => Category::all(),
+            'tags' => Tag::all(),
         ]);
     }
 

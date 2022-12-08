@@ -24,10 +24,24 @@
                     </div>
 
                     <div class="control-group mb-4">
+                        <label class="ml-4">Kategoriya</label>
                         <select name="category_id" class="form-select form-control form-control-lg">
 {{--                            <option selected>Kategoriya tanlang</option>--}}
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                       {{-- @error('title')
+                        <p class="help-block text-danger ml-4">{{ $message }}</p>
+                        @enderror--}}
+                    </div>
+
+                    <div class="control-group mb-4">
+                        <label class="ml-4">Taglar</label>
+                        <select name="tags[]" multiple class="form-select form-control form-control-lg">
+{{--                            <option selected>Kategoriya tanlang</option>--}}
+                            @foreach($tags as $tag)
+                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                             @endforeach
                         </select>
                        {{-- @error('title')
