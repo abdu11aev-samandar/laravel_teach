@@ -13,82 +13,86 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
+
                     @auth()
-                        <div class="row mb-4">
-                            <a class="btn btn-sm btn-outline-dark mr-2"
-                               href="{{ route('posts.edit',['post'=>$post->id]) }}">
-                                O'zgartirish
-                            </a>
-                            <form action="{{ route('posts.destroy',['post'=>$post->id]) }}"
-                                  method="post"
-                                  onsubmit="return confirm('Rostan ham o\'chirishni hohlaysizmi?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-danger">
-                                    O'chirish
-                                </button>
-                            </form>
-                        </div>
-                    @endauth
-
-                    <div class="mb-5">
-                        <div class="d-flex mb-2">
-                            @foreach($post->tags as $tag)
-                                <a class="text-secondary text-uppercase font-weight-medium">{{ $tag->name }}</a>
-                                <span class="text-primary px-2">|</span>
-                            @endforeach
-                            <a class="text-secondary text-uppercase font-weight-medium"
-                               href="">{{ $post->created_at }}</a>
-                        </div>
-                        <div class="d-flex mb-2">
-                            <a class="text-danger text-uppercase font-weight-medium">{{ $post->category->name }}</a>
-                        </div>
-                        <h1 class="section-title mb-3">{{ $post->title }}</h1>
-                    </div>
-
-                    <div class="mb-5">
-                        <img class="img-fluid rounded w-100 mb-4" src="{{ asset('storage/' . $post->photo) }}"
-                             alt="Image">
-                        <p>{{ $post->content }}</p>
-                    </div>
-
-                    <div class="mb-5">
-                        <h3 class="mb-4 section-title">{{ $post->comments()->count() }} Izohlar</h3>
-
-                        @foreach($post->comments as $comment)
-                            <div class="media mb-4">
-                                <img src="{{ $comment->user->photo }}" alt="Image"
-                                     class="img-fluid rounded-circle mr-3 mt-1"
-                                     style="width: 45px;">
-                                <div class="media-body">
-                                    <h6>{{ $comment->user->name }} <small><i>{{ $comment->created_at }}</i></small></h6>
-                                    <p>{{ $comment->body }}</p>
-                                </div>
-                            </div>
-                        @endforeach
-
-                    </div>
-
-                    <div class="bg-light rounded p-5">
-                        <h3 class="mb-4 section-title">Izoh qoldirish</h3>
-                        @auth()
-                            <form action="{{ route('comments.store') }}" method="post">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="message">Xabar</label>
-                                    <textarea name="body" cols="30" rows="5" class="form-control"></textarea>
-                                </div>
-                                <input type="hidden" name="post_id" value="{{ $post->id }}">
-                                <div class="form-group mb-0">
-                                    <input type="submit" value="Yuborish" class="btn btn-primary">
-                                </div>
-                            </form>
-                        @else
-                            <div>Izoh qoldirish uchun
-                                <a href="{{ route('login') }}" class="btn btn-primary">Kiring</a>
+                        @canany(['update','delete'],$post)
+                            <div class="row mb-4">
+                                <a class="btn btn-sm btn-outline-dark mr-2"
+                                   href="{{ route('posts.edit',['post' => $post->id]) }}">
+                                    O'zgartirish
+                                </a>
+                                <form action="{{ route('posts.destroy',['post' => $post->id]) }}"
+                                      method="post"
+                                      onsubmit="return confirm('Rostan ham o\'chirishni hohlaysizmi?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        O'chirish
+                                    </button>
+                                </form>
+                                @endcanany
                             </div>
                         @endauth
-                    </div>
+
+                        <div class="mb-5">
+                            <div class="d-flex mb-2">
+                                @foreach($post->tags as $tag)
+                                    <a class="text-secondary text-uppercase font-weight-medium">{{ $tag->name }}</a>
+                                    <span class="text-primary px-2">|</span>
+                                @endforeach
+                                <a class="text-secondary text-uppercase font-weight-medium"
+                                   href="">{{ $post->created_at }}</a>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <a class="text-danger text-uppercase font-weight-medium">{{ $post->category->name }}</a>
+                            </div>
+                            <h1 class="section-title mb-3">{{ $post->title }}</h1>
+                        </div>
+
+                        <div class="mb-5">
+                            <img class="img-fluid rounded w-100 mb-4" src="{{ asset('storage/' . $post->photo) }}"
+                                 alt="Image">
+                            <p>{{ $post->content }}</p>
+                        </div>
+
+                        <div class="mb-5">
+                            <h3 class="mb-4 section-title">{{ $post->comments()->count() }} Izohlar</h3>
+
+                            @foreach($post->comments as $comment)
+                                <div class="media mb-4">
+                                    <img src="{{ $comment->user->photo }}" alt="Image"
+                                         class="img-fluid rounded-circle mr-3 mt-1"
+                                         style="width: 45px;">
+                                    <div class="media-body">
+                                        <h6>{{ $comment->user->name }} <small><i>{{ $comment->created_at }}</i></small>
+                                        </h6>
+                                        <p>{{ $comment->body }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                        </div>
+
+                        <div class="bg-light rounded p-5">
+                            <h3 class="mb-4 section-title">Izoh qoldirish</h3>
+                            @auth()
+                                <form action="{{ route('comments.store') }}" method="post">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="message">Xabar</label>
+                                        <textarea name="body" cols="30" rows="5" class="form-control"></textarea>
+                                    </div>
+                                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                    <div class="form-group mb-0">
+                                        <input type="submit" value="Yuborish" class="btn btn-primary">
+                                    </div>
+                                </form>
+                            @else
+                                <div>Izoh qoldirish uchun
+                                    <a href="{{ route('login') }}" class="btn btn-primary">Kiring</a>
+                                </div>
+                            @endauth
+                        </div>
                 </div>
 
                 <div class="col-lg-4 mt-5 mt-lg-0">
