@@ -19,10 +19,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PageController::class, 'main'])->name('main');
-Route::get('about', [PageController::class, 'about'])->name('about');
-Route::get('services', [PageController::class, 'services'])->name('services');
-Route::get('projects', [PageController::class, 'projects'])->name('projects');
-Route::get('contact', [PageController::class, 'contact'])->name('contact');
+Route::get('about', [PageController::class, 'about'])->name('about')/*->middleware('auth', 'can')*/;
+Route::get('services', [PageController::class, 'services'])->name('services')/*->middleware('auth')*/;
+Route::get('projects', [PageController::class, 'projects'])->name('projects')/*->middleware('auth.basic')*/;
+Route::get('contact', [PageController::class, 'contact'])->name('contact')->middleware('throttle:3');
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');

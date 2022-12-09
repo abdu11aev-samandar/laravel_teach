@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Events\PostCreated;
 use App\Http\Requests\StorePostRequest;
+use App\Jobs\ChangePost;
+use App\Jobs\UploadBigFile;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
@@ -18,6 +20,7 @@ class PostController extends Controller
     {
         $this->middleware('auth')->except(['index', 'show']);
         $this->authorizeResource(Post::class, 'post');
+        $this->middleware('password.confirm')->only('edit');
     }
 
     public function index()
@@ -58,6 +61,8 @@ class PostController extends Controller
         }
 
         PostCreated::dispatch($post);
+
+        ChangePost::dispatch($post);
 
         return redirect()->route('posts.index');
     }
