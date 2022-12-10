@@ -15,7 +15,16 @@
             <a href="{{ route('contact') }}" class="nav-item nav-link">Aloqa</a>
         </div>
         @auth()
-            <div>
+
+                <div class="pr-2">
+                    <a href="{{ route('notifications.index') }}" class="text-dark ">
+                        <i class="fas fa-bell fa-2x"></i>
+                        <span
+                            class="badge rounded-pill badge-notification bg-danger">{{ auth()->user()->unreadNotifications()->count() }}</span>
+                    </a>
+                </div>
+
+            <div class="mr-2">
                 {{auth()->user()->name}}
             </div>
             <a href="{{ route('posts.create') }}" class="btn btn-primary mr-3 d-none d-lg-block">Post Yaratish</a>

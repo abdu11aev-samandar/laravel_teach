@@ -13,7 +13,8 @@
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -114,7 +115,8 @@
         </div>
         <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-semi-bold text-primary mb-4">Newsletter</h4>
-            <p>Rebum labore lorem dolores kasd est, et ipsum amet et at kasd, ipsum sea tempor magna tempor. Accu kasd sed ea duo ipsum.</p>
+            <p>Rebum labore lorem dolores kasd est, et ipsum amet et at kasd, ipsum sea tempor magna tempor. Accu kasd
+                sed ea duo ipsum.</p>
             <div class="w-100">
                 <div class="input-group">
                     <input type="text" class="form-control border-0" style="padding: 25px;" placeholder="Your Email">
@@ -126,10 +128,12 @@
         </div>
     </div>
 </div>
-<div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5" style="border-color: #3E3E4E !important;">
+<div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5"
+     style="border-color: #3E3E4E !important;">
     <div class="row">
         <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
-            <p class="m-0 text-white">&copy; <a href="#">Your Site Name</a>. All Rights Reserved. Designed by <a href="https://htmlcodex.com">HTML Codex</a>
+            <p class="m-0 text-white">&copy; <a href="#">Your Site Name</a>. All Rights Reserved. Designed by <a
+                    href="https://htmlcodex.com">HTML Codex</a>
             </p>
         </div>
         <div class="col-lg-6 text-center text-md-right">
