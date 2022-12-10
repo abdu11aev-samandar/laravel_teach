@@ -12,6 +12,7 @@ use App\Models\Tag;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Mail;
 use Storage;
 
 class PostController extends Controller
@@ -62,7 +63,11 @@ class PostController extends Controller
 
         PostCreated::dispatch($post);
 
-        ChangePost::dispatch($post);
+        ChangePost::dispatch($post)->onQueue('uploading');
+
+//        Mail::to($request->user())->send(new \App\Mail\PostCreated($post));
+//        Mail::to($request->user())->send((new \App\Mail\PostCreated($post))->onQueue('sending-mails'));
+        Mail::to($request->user())->later(now()->addSeconds(5), (new \App\Mail\PostCreated($post))->onQueue('sending-mails'));
 
         return redirect()->route('posts.index');
     }
