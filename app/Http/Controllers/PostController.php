@@ -23,13 +23,19 @@ class PostController extends Controller
     {
         $this->middleware('auth')->except(['index', 'show']);
         $this->authorizeResource(Post::class, 'post');
-        $this->middleware('password.confirm')->only('edit');
+//        $this->middleware('password.confirm')->only('edit');
     }
 
     public function index()
     {
-        $posts = Cache::remember('posts',now()->addSeconds(30), function () {
-            return Post::latest()->get();
+        /*Cashe::flush();
+        Cashe::forget('posts');
+        Cashe::pull('posts');
+        $posts = Post::latest()->paginate(9);
+        $posts = Post::latest()->get();*/
+
+        $posts = Cache::remember('posts', now()->addSeconds(30), function () {
+            return Post::latest()->paginate(9);
         });
 
         return view('posts.index')->with('posts', $posts);
@@ -74,7 +80,7 @@ class PostController extends Controller
 //        auth()->user()->notify(new \App\Notifications\PostCreated($post));
         Notification::send(auth()->user(), new \App\Notifications\PostCreated($post));
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('status', 'success');
     }
 
     public function show(Post $post)

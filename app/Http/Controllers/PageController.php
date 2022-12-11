@@ -8,6 +8,13 @@ class PageController extends Controller
 {
     public function main()
     {
+//        session()->put('testing', 'testing123');
+//        \Session::put('t', 'asadsdsdada');
+//        session()->forget('testing123');
+//        dump(session()->get('testing123'));
+
+
+//        dd(session()->all());
         return view('main');
     }
 

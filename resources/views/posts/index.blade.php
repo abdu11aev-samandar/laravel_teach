@@ -10,12 +10,27 @@
     <!-- Blog Start -->
     <div class="container-fluid py-5">
         <div class="container">
+
+            @if(session('status'))
+                @if(session('status')=='success')
+                    <div class="alert alert-success">
+                        {{ __('Yaratildi') }}
+                    </div>
+                @elseif(session('status')=='error')
+                    <div class="alert alert-danger">
+                        {{ __('Xato') }}
+                    </div>
+                @endif
+            @endif
+
             <div class="row align-items-end mb-4">
                 <div class="col-lg-6">
                     <h6 class="text-secondary font-weight-semi-bold text-uppercase mb-3">Latest Blog</h6>
                     <h1 class="section-title mb-3">Oxirgi Postlar</h1>
                 </div>
             </div>
+
+
             <div class="row">
 
                 @foreach($posts as $post)
@@ -42,7 +57,7 @@
                     </div>
                 @endforeach
 
-{{--                {{ $posts->links() }}--}}
+                {{ $posts->links() }}
             </div>
         </div>
     </div>
