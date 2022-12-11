@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Notification;
+use Log;
 use Mail;
 use Storage;
 
@@ -23,16 +24,19 @@ class PostController extends Controller
     {
         $this->middleware('auth')->except(['index', 'show']);
         $this->authorizeResource(Post::class, 'post');
-//        $this->middleware('password.confirm')->only('edit');
     }
 
     public function index()
     {
-        /*Cashe::flush();
-        Cashe::forget('posts');
-        Cashe::pull('posts');
-        $posts = Post::latest()->paginate(9);
-        $posts = Post::latest()->get();*/
+        $message = "Bu log qilinmoqda";
+        Log::emergency($message);
+        Log::alert($message);
+        Log::critical($message);
+        Log::error($message);
+        Log::warning($message);
+        Log::notice($message);
+        Log::info($message);
+        Log::debug($message);
 
         $posts = Cache::remember('posts', now()->addSeconds(30), function () {
             return Post::latest()->paginate(9);
@@ -77,7 +81,6 @@ class PostController extends Controller
 
         Mail::to($request->user())->later(now()->addSeconds(5), (new \App\Mail\PostCreated($post))->onQueue('sending-mails'));
 
-//        auth()->user()->notify(new \App\Notifications\PostCreated($post));
         Notification::send(auth()->user(), new \App\Notifications\PostCreated($post));
 
         return redirect()->route('posts.index')->with('status', 'success');
