@@ -28,15 +28,18 @@ class PostController extends Controller
 
     public function index()
     {
-        $message = "Bu log qilinmoqda";
-        Log::emergency($message);
-        Log::alert($message);
-        Log::critical($message);
-        Log::error($message);
-        Log::warning($message);
-        Log::notice($message);
-        Log::info($message);
-        Log::debug($message);
+//        $response = \Http::get('http://kun.uz');
+        $response = \Http::post('http://kun.uz', [
+            'name' => 'Sarvar',
+            'role' => 'Admin'
+        ]);
+
+        $response = \Http::get('http://kun.uz', [
+            'name' => 'Sarvar',
+            'role' => 'Admin'
+        ]);
+
+        dd($response);
 
         $posts = Cache::remember('posts', now()->addSeconds(30), function () {
             return Post::latest()->paginate(9);
