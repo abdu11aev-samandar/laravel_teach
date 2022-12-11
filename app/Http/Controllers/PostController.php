@@ -28,8 +28,6 @@ class PostController extends Controller
 
     public function index()
     {
-//        $posts = Post::latest()->paginate(9);
-//        $posts = Post::latest()->get();
         $posts = Cache::remember('posts',now()->addSeconds(30), function () {
             return Post::latest()->get();
         });
