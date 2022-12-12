@@ -28,19 +28,6 @@ class PostController extends Controller
 
     public function index()
     {
-//        $response = \Http::get('http://kun.uz');
-        $response = \Http::post('http://kun.uz', [
-            'name' => 'Sarvar',
-            'role' => 'Admin'
-        ]);
-
-        $response = \Http::get('http://kun.uz', [
-            'name' => 'Sarvar',
-            'role' => 'Admin'
-        ]);
-
-        dd($response);
-
         $posts = Cache::remember('posts', now()->addSeconds(30), function () {
             return Post::latest()->paginate(9);
         });
