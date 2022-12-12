@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\PostApiController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cache;
@@ -20,6 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('posts',function (){
+Route::get('posts', function () {
     return Cache::get('title');
 });
+
+//Route::get('posts/{post}', [PostApiController::class, 'show']);
+//Route::get('posts', [PostApiController::class, 'index']);
+
+Route::apiResource('posts', PostApiController::class);
