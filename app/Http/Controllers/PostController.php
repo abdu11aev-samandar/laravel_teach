@@ -8,6 +8,7 @@ use App\Jobs\ChangePost;
 use App\Jobs\UploadBigFile;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Role;
 use App\Models\Tag;
 use DB;
 use Illuminate\Http\Request;
@@ -37,6 +38,9 @@ class PostController extends Controller
 
     public function create()
     {
+//        Gate::authorize('create-post', Role::where('name', 'blogger')->first());
+//        Gate::authorize('create-post', Role::find(3));
+
         return view('posts.create')->with([
             'categories' => Category::all(),
             'tags' => Tag::all()
