@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -13,7 +14,29 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index');
+        //Create
+        /*$newPost = Post::create([
+            'title' => '5',
+            'short_content' => 'short',
+            'content' => 'content 123',
+            'photo' => 'photo.jpg'
+        ]);*/
+
+        //Update
+        /*$post = Post::find(1);
+        $post->title = "Updated";
+        $post->save();*/
+
+        //Delete
+        /*$post = Post::find(1);
+        $post->delete();
+
+        $post->destroy(1);*/
+
+
+        return 'success';
+
+//        return view('posts.index');
     }
 
     /**
