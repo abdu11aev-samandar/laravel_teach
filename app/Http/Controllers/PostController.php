@@ -14,29 +14,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //Create
-        /*$newPost = Post::create([
-            'title' => '5',
-            'short_content' => 'short',
-            'content' => 'content 123',
-            'photo' => 'photo.jpg'
-        ]);*/
+        $posts = Post::all();
 
-        //Update
-        /*$post = Post::find(1);
-        $post->title = "Updated";
-        $post->save();*/
-
-        //Delete
-        /*$post = Post::find(1);
-        $post->delete();
-
-        $post->destroy(1);*/
-
-
-        return 'success';
-
-//        return view('posts.index');
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -66,9 +46,14 @@ class PostController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        $recent_posts = Post::latest()->get()->except($post->id)->take(5);
+
+        return view('posts.show', compact(
+            'post',
+            'recent_posts'
+        ));
     }
 
     /**
