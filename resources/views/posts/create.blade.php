@@ -15,28 +15,26 @@
                 <form action="{{ route('posts.store') }}" method="post">
                     @csrf
                     <div class="control-group">
-                        <input type="text" class="form-control p-4" name="title" placeholder="Title"
-                               required="required"/>
-                        <p class="help-block text-danger"></p>
+                        <input type="text" class="form-control p-4" name="title" placeholder="Title" value="{{ old('title') }}"/>
+                        @error('title')
+                            <p class="help-block text-danger ml-3">{{ $message }}</p>
+                        @enderror
                     </div>
-                   {{-- <div class="control-group">
-                        <input type="file" class="form-control p-4" id="subject" placeholder="Picture"
-                               required="required"/>
-                        <p class="help-block text-danger"></p>
-                    </div>--}}
-                    <div class="control-group">
-                        <textarea class="form-control p-4" rows="3" name="short_content" placeholder="Short Content"
-                                  required="required"></textarea>
-                        <p class="help-block text-danger"></p>
+                    <div class="control-group mt-3 mb-3">
+                        <textarea class="form-control p-4" rows="3" name="short_content" placeholder="Short Content">{{ old('title') }}</textarea>
+                        @error('short_content')
+                            <p class="help-block text-danger ml-3">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="control-group">
-                        <textarea class="form-control p-4" rows="6" name="content" placeholder="Content"
-                                  required="required"></textarea>
-                        <p class="help-block text-danger"></p>
+                        <textarea class="form-control p-4" rows="6" name="content" placeholder="Content">{{ old('title') }}</textarea>
+                        @error('content')
+                            <p class="help-block text-danger ml-3">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
-                        <button class="btn btn-primary btn-block py-3 px-5" type="submit">
-                            Saqlash
+                        <button class="btn btn-primary btn-block py-3 px-5 mt-3" type="submit">
+                            Save
                         </button>
                     </div>
                 </form>
