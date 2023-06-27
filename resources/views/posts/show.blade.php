@@ -13,9 +13,16 @@
             <div class="row">
 
                 <div class="col-lg-8">
-                    <div class="text-right">
-                        <a class="btn btn-sm btn-outline-dark" href="{{ route('posts.edit',['post'=>$post->id]) }}">Edit</a>
-                        <a class="btn btn-sm btn-outline-danger" href="">delete</a>
+                    <div class="row mb-4">
+                        <a class="btn btn-sm btn-outline-dark mr-2"
+                           href="{{ route('posts.edit',['post'=>$post->id]) }}">Edit</a>
+                        <form action="{{ route('posts.destroy',['post'=>$post->id]) }}"
+                              method="post"
+                              onsubmit="return confirm('Are you sure delete?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                        </form>
                     </div>
                     <div class="mb-5">
                         <div class="d-flex mb-2">
@@ -30,7 +37,8 @@
                     </div>
 
                     <div class="mb-5">
-                        <img class="img-fluid rounded w-100 mb-4" src="{{ asset('storage/'.$post->photo) }}" alt="Image">
+                        <img class="img-fluid rounded w-100 mb-4" src="{{ asset('storage/'.$post->photo) }}"
+                             alt="Image">
                         <p>{{ $post->content }}</p>
                     </div>
 

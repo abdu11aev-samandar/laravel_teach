@@ -106,7 +106,7 @@ class PostController extends Controller
             'photo' => $path ?? $post->photo,
         ]);
 
-        return redirect()->route('posts.show',['post'=>$post->id]);
+        return redirect()->route('posts.show', ['post' => $post->id]);
     }
 
     /**
@@ -115,8 +115,14 @@ class PostController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        if (isset($post->photo)) {
+            \Storage::delete($post->photo);
+        }
+
+        $post->delete();
+
+        return redirect()->route('posts.index');
     }
 }
