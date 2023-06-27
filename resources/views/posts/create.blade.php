@@ -27,13 +27,13 @@
                         @enderror
                     </div>
                     <div class="control-group mb-3">
-                        <textarea class="form-control p-4" rows="3" name="short_content" placeholder="Short Content">{{ old('title') }}</textarea>
+                        <textarea class="form-control p-4" rows="3" name="short_content" placeholder="Short Content">{{ old('short_content') }}</textarea>
                         @error('short_content')
                             <p class="help-block text-danger ml-3">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="control-group">
-                        <textarea class="form-control p-4" rows="6" name="content" placeholder="Content">{{ old('title') }}</textarea>
+                        <textarea class="form-control p-4" rows="6" name="content" placeholder="Content">{{ old('content') }}</textarea>
                         @error('content')
                             <p class="help-block text-danger ml-3">{{ $message }}</p>
                         @enderror
