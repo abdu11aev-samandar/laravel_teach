@@ -13,6 +13,7 @@ class Post extends Model
 
     protected $fillable = [
         'user_id',
+        'category_id',
         'title',
         'short_content',
         'content',
@@ -29,5 +30,10 @@ class Post extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function post(): BelongsTo
+    {
+        return $this->belongsTo(Post::class);
     }
 }
