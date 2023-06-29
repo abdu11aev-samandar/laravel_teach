@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -16,7 +17,10 @@ class PostController extends Controller
             'index',
             'show',
         ]);
+
+        $this->authorizeResource(Post::class, 'post');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -101,6 +105,14 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        /*if (!Gate::allows('update-post', $post)) {
+           abort(403);
+       }*/
+//        Gate::authorize('update-post', $post);
+
+//        Gate::authorize('update', $post);
+//        $this->authorize('update', $post);
+
         return view('posts.edit', compact('post'));
     }
 
@@ -113,6 +125,14 @@ class PostController extends Controller
      */
     public function update(StorePostRequest $request, Post $post)
     {
+        /*if (!Gate::allows('update-post', $post)) {
+           abort(403);
+       }*/
+//        Gate::authorize('update-post', $post);
+
+//        Gate::authorize('update', $post);
+//        $this->authorize('update', $post);
+
         if ($request->hasFile('photo')) {
 
             if (isset($post->photo)) {
@@ -141,6 +161,14 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        /*if (!Gate::allows('delete-post', $post)) {
+           abort(403);
+       }*/
+//        Gate::authorize('delete-post', $post);
+
+//        Gate::authorize('delete', $post);
+//        $this->authorize('delete', $post);
+
         if (isset($post->photo)) {
             \Storage::delete($post->photo);
         }

@@ -15,17 +15,22 @@
                 <div class="col-lg-8">
 
                     @auth
-                        <div class="row mb-4">
-                            <a class="btn btn-sm btn-outline-dark mr-2"
-                               href="{{ route('posts.edit',['post'=>$post->id]) }}">Edit</a>
-                            <form action="{{ route('posts.destroy',['post'=>$post->id]) }}"
-                                  method="post"
-                                  onsubmit="return confirm('Are you sure delete?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-                            </form>
-                        </div>
+{{--                        @canany(['update-post','delete-post'], $post)--}}
+                        @canany(['update','delete'], $post)
+
+                            <div class="row mb-4">
+                                <a class="btn btn-sm btn-outline-dark mr-2"
+                                   href="{{ route('posts.edit',['post' => $post->id]) }}">Edit</a>
+                                <form action="{{ route('posts.destroy',['post' => $post->id]) }}"
+                                      method="post"
+                                      onsubmit="return confirm('Are you sure delete?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                </form>
+                            </div>
+
+                        @endcanany
                     @endauth
 
                     <div class="mb-5">
